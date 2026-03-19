@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Night Aura Poster</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lilita+One&family=Permanent+Marker&family=Russo+One&family=Boogaloo&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#111;display:flex;justify-content:center;align-items:center;min-height:100vh;padding:20px;}
+
+.poster{
+  width:500px;min-height:780px;
+  background:#0d0d0d;
+  position:relative;overflow:hidden;
+  border:3px solid #222;
+}
+
+/* NOISE TEXTURE */
+.poster::before{
+  content:'';position:absolute;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E");
+  pointer-events:none;z-index:0;
+}
+
+/* GLOW SPOTS */
+.glow{position:absolute;border-radius:50%;pointer-events:none;z-index:1;}
+.g1{width:300px;height:300px;top:-80px;left:50%;transform:translateX(-50%);background:radial-gradient(circle,rgba(180,60,255,0.2) 0%,transparent 70%);}
+.g2{width:200px;height:200px;bottom:100px;left:-50px;background:radial-gradient(circle,rgba(45,212,200,0.1) 0%,transparent 70%);}
+.g3{width:200px;height:200px;bottom:100px;right:-50px;background:radial-gradient(circle,rgba(232,121,249,0.1) 0%,transparent 70%);}
+
+/* BOLTS */
+.bolt{position:absolute;font-size:26px;z-index:5;animation:flash 2.5s ease-in-out infinite;}
+.b1{top:16px;left:16px;transform:rotate(-15deg);color:#c8f03c;}
+.b2{top:16px;right:16px;transform:rotate(15deg);color:#e879f9;}
+.b3{top:220px;right:10px;font-size:20px;color:#a855f7;}
+.b4{top:220px;left:10px;font-size:20px;color:#2dd4c8;}
+.b5{bottom:180px;left:14px;font-size:18px;color:#c8f03c;}
+.b6{bottom:180px;right:14px;font-size:18px;color:#e879f9;}
+@keyframes flash{0%,88%,100%{opacity:1;}94%{opacity:0.1;}}
+
+/* SQUIGGLES */
+.squig{position:absolute;z-index:5;opacity:0.5;}
+
+/* PRESENTED BY */
+.presenter{
+  position:relative;z-index:10;
+  text-align:center;padding:18px 20px 6px;
+  font-family:'Boogaloo',cursive;
+  font-size:13px;letter-spacing:3px;
+  color:rgba(200,240,60,0.7);text-transform:uppercase;
+}
+
+/* MAIN TITLE */
+.title-block{position:relative;z-index:10;text-align:center;padding:4px 16px 0;}
+.title-night{
+  font-family:'Lilita One',cursive;font-size:92px;
+  line-height:0.88;color:#fff;display:block;
+  text-shadow:4px 4px 0 #5b21b6,8px 8px 0 #3b0764,0 0 40px rgba(180,60,255,0.7);
+  letter-spacing:-2px;
+}
+.title-aura{
+  font-family:'Lilita One',cursive;font-size:108px;
+  line-height:0.85;color:#c8f03c;display:block;
+  text-shadow:5px 5px 0 #3f6212,10px 10px 0 #1a2e05,0 0 50px rgba(200,240,60,0.8);
+  letter-spacing:-3px;margin-top:-6px;
+}
+
+/* HYPE STRIP */
+.hype-strip{
+  position:relative;z-index:10;
+  margin:10px 18px 0;
+  background:linear-gradient(135deg,#7c3aed,#a855f7,#e879f9);
+  padding:10px 16px;transform:rotate(-1.5deg);
+  box-shadow:4px 4px 0 #3b0764,0 0 20px rgba(168,85,247,0.4);
+}
+.hype-text{
+  font-family:'Permanent Marker',cursive;
+  font-size:17px;color:#fff;text-align:center;
+  letter-spacing:1px;text-shadow:2px 2px 0 rgba(0,0,0,0.4);
+}
+
+/* FLOATING TAGS */
+.tag-date{
+  position:absolute;z-index:20;
+  top:318px;left:-4px;
+  background:#fff;padding:8px 14px;
+  transform:rotate(-6deg);
+  box-shadow:3px 3px 0 #a855f7;
+}
+.tag-time{
+  position:absolute;z-index:20;
+  top:318px;right:-4px;
+  background:#c8f03c;padding:8px 14px;
+  transform:rotate(6deg);
+  box-shadow:3px 3px 0 #3f6212;
+}
+.tag-main{font-family:'Lilita One',cursive;font-size:22px;line-height:1;}
+.tag-sub{font-family:'Boogaloo',cursive;font-size:11px;letter-spacing:1px;}
+.tag-date .tag-main{color:#7c3aed;}
+.tag-date .tag-sub{color:rgba(124,58,237,0.6);}
+.tag-time .tag-main{color:#000;}
+.tag-time .tag-sub{color:rgba(0,0,0,0.6);}
+
+/* ACTIVITIES STRIP */
+.activities-strip{
+  position:relative;z-index:10;
+  margin:10px 18px 0;
+  background:linear-gradient(135deg,#0f172a,#1e1b4b);
+  border:2px solid rgba(200,240,60,0.4);
+  padding:12px 18px;
+  box-shadow:0 0 20px rgba(200,240,60,0.1);
+}
+.act-label{
+  font-family:'Boogaloo',cursive;
+  font-size:10px;letter-spacing:4px;color:rgba(200,240,60,0.6);
+  text-transform:uppercase;margin-bottom:6px;
+}
+.act-items{display:flex;flex-wrap:wrap;gap:6px;}
+.act-tag{
+  font-family:'Boogaloo',cursive;font-size:13px;
+  padding:3px 10px;border-radius:2px;
+}
+.at-purple{background:rgba(168,85,247,0.2);border:1px solid #7c3aed;color:#c084fc;}
+.at-green{background:rgba(200,240,60,0.12);border:1px solid #84cc16;color:#c8f03c;}
+.at-aqua{background:rgba(45,212,200,0.12);border:1px solid #2dd4c8;color:#2dd4c8;}
+.at-pink{background:rgba(232,121,249,0.12);border:1px solid #e879f9;color:#e879f9;}
+
+/* TICKET STRIP */
+.ticket-section{
+  position:relative;z-index:10;
+  margin:10px 18px 0;
+}
+.ticket-label{
+  font-family:'Boogaloo',cursive;font-size:10px;
+  letter-spacing:4px;color:rgba(255,255,255,0.35);
+  text-transform:uppercase;margin-bottom:6px;padding-left:2px;
+}
+.ticket-cards{display:flex;gap:8px;}
+.tcard{
+  flex:1;padding:12px 12px;position:relative;overflow:hidden;
+}
+.tcard::before,.tcard::after{
+  content:'';position:absolute;
+  left:-8px;top:50%;transform:translateY(-50%);
+  width:16px;height:16px;border-radius:50%;background:#0d0d0d;z-index:2;
+}
+.tcard::after{left:auto;right:-8px;}
+.tc-eb{
+  background:linear-gradient(135deg,#1a0533,#2e1065);
+  border:2px solid #c8f03c;
+  box-shadow:0 0 16px rgba(200,240,60,0.25),4px 4px 0 #1a2e05;
+}
+.tc-rg{
+  background:linear-gradient(135deg,#0c1a3a,#162550);
+  border:2px solid #a855f7;
+  box-shadow:4px 4px 0 #1e0a40;
+}
+.tc-vip{
+  background:linear-gradient(135deg,#1a1200,#2a1e00);
+  border:2px solid #f5c842;
+  box-shadow:4px 4px 0 #3d2a00;
+}
+.tc-vvip{
+  background:linear-gradient(135deg,#0a1a1a,#0d2828);
+  border:2px solid #2dd4c8;
+  box-shadow:4px 4px 0 #0a2020;
+}
+.tc-type{font-family:'Boogaloo',cursive;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,0.45);text-transform:uppercase;}
+.tc-name{font-family:'Russo One',sans-serif;font-size:11px;color:#fff;margin:2px 0;}
+.tc-price{font-family:'Lilita One',cursive;font-size:36px;line-height:1;color:#fff;text-shadow:2px 2px 0 rgba(0,0,0,0.4);}
+.tc-ugx{font-family:'Boogaloo',cursive;font-size:11px;color:rgba(255,255,255,0.4);}
+.tc-eb .tc-price{color:#c8f03c;text-shadow:2px 2px 0 #1a2e05,0 0 12px rgba(200,240,60,0.5);}
+.tc-vip .tc-price{color:#f5c842;}
+.tc-vvip .tc-price{color:#2dd4c8;}
+
+/* LOCATION */
+.location-strip{
+  position:relative;z-index:10;
+  margin:10px 18px 0;
+  background:#e879f9;
+  padding:12px 18px;
+  display:flex;align-items:center;gap:12px;
+  box-shadow:5px 5px 0 #86198f,0 0 20px rgba(232,121,249,0.3);
+  transform:rotate(-0.8deg);
+}
+.loc-icon{font-size:26px;}
+.loc-main{font-family:'Russo One',sans-serif;font-size:18px;color:#fff;text-shadow:2px 2px 0 rgba(0,0,0,0.3);line-height:1.1;}
+.loc-sub{font-family:'Boogaloo',cursive;font-size:13px;color:rgba(255,255,255,0.75);}
+
+/* DRESS CODE */
+.dresscode-strip{
+  position:relative;z-index:10;
+  margin:10px 18px 0;
+  border:2px dashed rgba(200,240,60,0.4);
+  padding:10px 18px;text-align:center;
+  background:rgba(200,240,60,0.04);
+}
+.dc-label{font-family:'Boogaloo',cursive;font-size:9px;letter-spacing:4px;color:rgba(200,240,60,0.5);text-transform:uppercase;}
+.dc-val{font-family:'Permanent Marker',cursive;font-size:17px;color:#e879f9;text-shadow:0 0 12px rgba(232,121,249,0.6);letter-spacing:1px;}
+
+/* BOTTOM */
+.bottom-strip{
+  position:relative;z-index:10;
+  margin:10px 18px 18px;
+  display:flex;align-items:center;justify-content:space-between;gap:8px;
+}
+.contact-block{}
+.contact-label{font-family:'Boogaloo',cursive;font-size:8px;letter-spacing:3px;color:rgba(255,255,255,0.25);text-transform:uppercase;margin-bottom:2px;}
+.contact-nums{font-family:'Boogaloo',cursive;font-size:12px;color:rgba(200,240,60,0.7);letter-spacing:0.5px;}
+.momo-badge{background:linear-gradient(135deg,#f5c842,#f59e0b);padding:6px 12px;box-shadow:3px 3px 0 #78350f;}
+.momo-text{font-family:'Russo One',sans-serif;font-size:11px;color:#000;letter-spacing:1px;text-align:center;}
+.momo-sub{font-family:'Boogaloo',cursive;font-size:9px;color:rgba(0,0,0,0.6);text-align:center;}
+</style>
+</head>
+<body>
+<div class="poster">
+  <!-- GLOWS -->
+  <div class="glow g1"></div>
+  <div class="glow g2"></div>
+  <div class="glow g3"></div>
+
+  <!-- BOLTS -->
+  <div class="bolt b1">⚡</div>
+  <div class="bolt b2">⚡</div>
+  <div class="bolt b3">⚡</div>
+  <div class="bolt b4">⚡</div>
+  <div class="bolt b5">⚡</div>
+  <div class="bolt b6">⚡</div>
+
+  <!-- SQUIGGLES -->
+  <svg class="squig" style="top:58px;left:8px;width:55px;height:26px;" viewBox="0 0 55 26">
+    <path d="M4,13 Q14,4 23,13 Q32,22 41,13 Q47,8 52,13" stroke="#a855f7" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  </svg>
+  <svg class="squig" style="top:58px;right:8px;width:55px;height:26px;" viewBox="0 0 55 26">
+    <path d="M4,13 Q14,4 23,13 Q32,22 41,13 Q47,8 52,13" stroke="#e879f9" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  </svg>
+  <svg class="squig" style="bottom:165px;left:12px;width:38px;height:18px;" viewBox="0 0 38 18">
+    <path d="M2,9 Q9,2 16,9 Q23,16 30,9 Q34,5 37,9" stroke="#c8f03c" stroke-width="2" fill="none" stroke-linecap="round"/>
+  </svg>
+
+  <!-- FLOATING TAGS -->
+  <div class="tag-date">
+    <div class="tag-main">APR 17</div>
+    <div class="tag-sub">2026</div>
+  </div>
+  <div class="tag-time">
+    <div class="tag-main">9 PM</div>
+    <div class="tag-sub">TILL SUNRISE</div>
+  </div>
+
+  <!-- TOP -->
+  <div class="presenter">✦ Sugar BaBy Presents ✦</div>
+
+  <!-- TITLE -->
+  <div class="title-block">
+    <span class="title-night">NIGHT</span>
+    <span class="title-aura">AURA</span>
+  </div>
+
+  <!-- HYPE -->
+  <div class="hype-strip">
+    <div class="hype-text">✨ Where Your Aura Takes Over ✨</div>
+  </div>
+
+  <!-- ACTIVITIES -->
+  <div class="activities-strip">
+    <div class="act-label">What's Going Down</div>
+    <div class="act-items">
+      <span class="act-tag at-purple">🎵 Live Music</span>
+      <span class="act-tag at-green">🎤 Karaoke</span>
+      <span class="act-tag at-aqua">🎨 Glow Station</span>
+      <span class="act-tag at-pink">📸 Photo Booth</span>
+      <span class="act-tag at-purple">🎮 Party Games 18+</span>
+      <span class="act-tag at-green">🥃 Shots Marathon</span>
+      <span class="act-tag at-pink">🔥 Hot Boxing</span>
+      <span class="act-tag at-aqua">🎬 Movie Night</span>
+      <span class="act-tag at-purple">🌅 Sunrise Together</span>
+    </div>
+  </div>
+
+  <!-- TICKETS -->
+  <div class="ticket-section">
+    <div class="ticket-label">🎟 Tickets</div>
+    <div class="ticket-cards">
+      <div class="tcard tc-eb">
+        <div class="tc-type">Early Bird</div>
+        <div class="tc-name">BASIC</div>
+        <div class="tc-price">20K</div>
+        <div class="tc-ugx">UGX · Limited!</div>
+      </div>
+      <div class="tcard tc-rg">
+        <div class="tc-type">Regular</div>
+        <div class="tc-name">BASIC</div>
+        <div class="tc-price">25K</div>
+        <div class="tc-ugx">UGX</div>
+      </div>
+      <div class="tcard tc-vip">
+        <div class="tc-type">VIP</div>
+        <div class="tc-name">AURA PASS</div>
+        <div class="tc-price">35K</div>
+        <div class="tc-ugx">UGX</div>
+      </div>
+      <div class="tcard tc-vvip">
+        <div class="tc-type">VVIP</div>
+        <div class="tc-name">AURA FARMER</div>
+        <div class="tc-price">50K</div>
+        <div class="tc-ugx">UGX</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LOCATION -->
+  <div class="location-strip">
+    <div class="loc-icon">📍</div>
+    <div>
+      <div class="loc-main">Bevan's Lounge</div>
+      <div class="loc-sub">Kamonkoli</div>
+    </div>
+  </div>
+
+  <!-- DRESS CODE -->
+  <div class="dresscode-strip">
+    <div class="dc-label">👗 Dress Code</div>
+    <div class="dc-val">"Aura Check at the Door"</div>
+  </div>
+
+  <!-- BOTTOM -->
+  <div class="bottom-strip">
+    <div class="contact-block">
+      <div class="contact-label">RSVP & Tickets</div>
+      <div class="contact-nums">0750741502 · 0769115143 · 0783493666</div>
+    </div>
+    <div class="momo-badge">
+      <div class="momo-text">MTN / AIRTEL</div>
+      <div class="momo-sub">Mobile Money</div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
